@@ -1,6 +1,6 @@
 # Laravel chunked upload example
 
-Full example with Laravel 5.4 setup for [laravel-chunk-upload-example](https://github.com/pionl/laravel-chunk-upload-example) package
+Full example with Laravel 5.4 setup for [laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) package
 
 ## Installation
 
@@ -17,8 +17,8 @@ Optionally serve with `php artisan serve`
 Open the root page `http://localhost:8000` and open the desired examples.
 
 ## Example code
-* **Controller - dynamic usage** at `./app/Http/Controllers/UploadController.php`
-* **Views** at `./resources/views/example/`
+* **Controller - dynamic usage** at [./app/Http/Controllers/UploadController.php](./app/Http/Controllers/UploadController.php)
+* **Views** at [./resources/views/example/](./resources/views/example/)
 
 ## Copyright and License
 
