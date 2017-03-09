@@ -11,7 +11,7 @@
 @section('content')
     <h2>Example</h2>
     <div class="text-center">
-        <input id="fileupload" type="file" name="file" data-url="{{ url('api/upload') }}" style="display: inline;">
+        <input id="fileupload" type="file" name="file" data-url="{{ url('upload') }}" style="display: inline;">
         <ul id="file-upload-list" class="list-unstyled">
 
         </ul>

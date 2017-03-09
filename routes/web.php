@@ -19,3 +19,5 @@ Route::get('/jquery-file-upload', function () {
     return view('example/jquery-file-upload');
 });
 
+
+Route::post('upload', 'UploadController@upload');
