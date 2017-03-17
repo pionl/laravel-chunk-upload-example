@@ -20,4 +20,5 @@ Route::get('/jquery-file-upload', function () {
 });
 
 
-Route::post('upload', 'UploadController@upload');
+Route::post('upload', 'DependencyUploadController@uploadFile');
+Route::post('upload-advanced', 'UploadController@upload');
