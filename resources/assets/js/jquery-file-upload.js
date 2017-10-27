@@ -1,8 +1,8 @@
 var $ = window.$; // use the global jQuery instance
 
 var $uploadList = $("#file-upload-list");
-
-if ($uploadList.length > 0) {
+var $fileUpload = $('#fileupload');
+if ($uploadList.length > 0 && $fileUpload.length > 0) {
     var idSequence = 0;
 
     // A quick way setup

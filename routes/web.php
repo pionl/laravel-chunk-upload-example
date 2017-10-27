@@ -18,7 +18,9 @@ Route::get('/', function () {
 Route::get('/jquery-file-upload', function () {
     return view('example/jquery-file-upload');
 });
-
+Route::get('/dropzone', function () {
+    return view('example/dropzone');
+});
 
 Route::post('upload', 'DependencyUploadController@uploadFile');
 Route::post('upload-advanced', 'UploadController@upload');

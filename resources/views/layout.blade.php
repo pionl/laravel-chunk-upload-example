@@ -21,6 +21,7 @@
                 <div class="links">
                     <a href="https://github.com/pionl/laravel-chunk-upload">Github docs</a>
                     <a href="{{ url('jquery-file-upload') }}">jQuery-File-Upload example</a>
+                    <a href="{{ url('dropzone') }}">DropZone</a>
                     <a href="https://github.com/laravel/laravel">Laravel framework</a>
                 </div>
                 @yield('content')

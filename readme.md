@@ -1,6 +1,13 @@
 # Laravel chunked upload example
+This repo contains full example for [laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) package.
 
-Full example with Laravel 5.4 setup for [laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) package
+## Versions
+You can choose which version of laravel you are using.
+
+### Current branch (master) - Laravel 5.5
+
+### Laravel 5.4
+Full example with at [laravel-5-4 branch](https://github.com/pionl/laravel-chunk-upload-example/tree/laravel-5-4)
 
 ## Installation
 
