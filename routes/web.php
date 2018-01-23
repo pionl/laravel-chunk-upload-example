@@ -16,10 +16,19 @@ Route::get('/', function () {
 });
 
 Route::get('/jquery-file-upload', function () {
-    return view('example/jquery-file-upload');
+    return view('example/jquery-file-upload', [
+        'code' => file_get_contents(resource_path('assets/js/jquery-file-upload.js'))
+    ]);
 });
 Route::get('/dropzone', function () {
-    return view('example/dropzone');
+    return view('example/dropzone', [
+        'code' => file_get_contents(resource_path('assets/js/dropzone.js'))
+    ]);
+});
+Route::get('/resumable', function () {
+    return view('example/resumable', [
+        'code' => file_get_contents(resource_path('assets/js/resumable.js'))
+    ]);
 });
 
 Route::post('upload', 'DependencyUploadController@uploadFile');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd4d80e41be524d86ed3f9c59b02d8f4",
+    "content-hash": "59cf964385e47337218b02d0ec8c1ec5",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -849,7 +849,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2017-10-01T14:54:43+00:00"
+            "time": "2017-10-01 14:54:43"
         },
         {
             "name": "paragonie/random_compat",
@@ -905,18 +905,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pionl/laravel-chunk-upload.git",
-                "reference": "b1e363c"
+                "reference": "67b9d355bb9f71e049c67c255e49b90ffa20d03e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pionl/laravel-chunk-upload/zipball/b1e363c",
-                "reference": "b1e363c",
+                "url": "https://api.github.com/repos/pionl/laravel-chunk-upload/zipball/67b9d355bb9f71e049c67c255e49b90ffa20d03e",
+                "reference": "67b9d355bb9f71e049c67c255e49b90ffa20d03e",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*"
+                "illuminate/console": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*",
+                "illuminate/filesystem": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*",
+                "illuminate/http": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*",
+                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*"
             },
             "require-dev": {
+                "laravel/laravel": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*",
                 "mockery/mockery": "^0.9.9",
                 "phpunit/phpunit": "5.7 || 6.0"
             },
@@ -944,7 +948,7 @@
                 }
             ],
             "description": "Service for chunked upload with several js providers",
-            "time": "2017-10-27T10:45:09+00:00"
+            "time": "2017-10-27 13:50:59"
         },
         {
             "name": "psr/container",
@@ -1040,7 +1044,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "psr/simple-cache",
@@ -1367,7 +1371,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-24T14:40:29+00:00"
+            "time": "2017-10-24 14:40:29"
         },
         {
             "name": "symfony/css-selector",
@@ -1476,7 +1480,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-24T14:12:06+00:00"
+            "time": "2017-10-24 14:12:06"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1789,7 +1793,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-10-11T12:05:26+00:00"
+            "time": "2017-10-11 12:05:26"
         },
         {
             "name": "symfony/polyfill-php70",
@@ -2112,7 +2116,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2017-10-25T08:48:42+00:00"
+            "time": "2017-10-25 08:48:42"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
