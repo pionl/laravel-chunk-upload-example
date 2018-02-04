@@ -25,7 +25,8 @@ Open the root page `http://localhost:8000` and open the desired examples.
 
 ## Example code
 * **Controller - dynamic usage** at [./app/Http/Controllers/UploadController.php](./app/Http/Controllers/UploadController.php)
-* **Views** at [./resources/views/example/](./resources/views/example/)
+* **Views** at [./resources/views/example/](./resources/views/example/) - Here you can find basic layout for the providers.
+* **Javascripts** at [./resources/assets/js/](./resources/assets/js/) - Here you can find the initial setup for the providers.
 
 ## Copyright and License
 
