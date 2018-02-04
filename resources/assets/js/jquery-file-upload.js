@@ -11,7 +11,7 @@ if ($uploadList.length > 0 && $fileUpload.length > 0) {
         method: "POST",
         sequentialUploads: true,
         formData: function (form) {
-            //laravel token for communication
+            // Append token to the request - required for web routes
             return [{name: '_token', value: $('input[name=_token]').val()}];
         },
         progressall: function (e, data) {

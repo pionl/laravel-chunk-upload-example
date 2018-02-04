@@ -14,7 +14,7 @@ if ($fileUpload.length > 0 && $fileUploadDrop.length > 0) {
         throttleProgressCallbacks: 1,
         // Get the url from data-url tag
         target: $fileUpload.data('url'),
-        // Get the token
+        // Append token to the request - required for web routes
         query:{_token : $('input[name=_token]').val()}
     });
 

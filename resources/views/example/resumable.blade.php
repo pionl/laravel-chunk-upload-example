@@ -13,7 +13,9 @@
             Resumable not supported
         </div>
         <div id="resumable-drop" style="display: none">
-            <button id="resumable-browse" data-url="{{ url('upload') }}" >Upload</button> or drop here
+            <p><button id="resumable-browse" data-url="{{ url('api/upload') }}" >Upload</button> or drop here
+            </p>
+            <p>Uses `api/upload` endpoint which uses `browser` data instead of session (session is not inited in api routes). This is automatically detected.</p>
         </div>
         <ul id="file-upload-list" class="list-unstyled"  style="display: none">
 

@@ -40,6 +40,8 @@ class DependencyUploadController extends UploadController
 
                 return response()->json([
                     "done" => $handler->getPercentageDone(),
+                    // Debug only
+                    'useSession' => AbstractHandler::canUseSession()
                 ]);
             }
         } else {
