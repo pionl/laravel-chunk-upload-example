@@ -15,6 +15,8 @@ Full example with at [laravel-5-4 branch](https://github.com/pionl/laravel-chunk
 composer install
 npm install
 npm run dev
+cp .env.example .env
+php artisan key:generate
 ```
 
 Optionally serve with `php artisan serve`
