@@ -30,6 +30,13 @@ Open the root page `http://localhost:8000` and open the desired examples.
 * **Views** at [./resources/views/example/](./resources/views/example/) - Here you can find basic layout for the providers.
 * **Javascripts** at [./resources/assets/js/](./resources/assets/js/) - Here you can find the initial setup for the providers.
 
+### Uploading to AMAZON s3 (or any other cloud storage)
+It is recommended to upload the file in separate queue JOB. Uploading can take a time (for large files) and the request could
+get timed out. It is important to stream the file to the cloud (not using `file_get_contents`) which would eat your memory. 
+Also don't forget to remove the uploaded file after upload.
+
+Example code found at [./app/Http/Controllers/UploadController.php](./app/Http/Controllers/UploadController.php#L59). 
+
 ## Copyright and License
 
 [laravel-chunk-upload-example](https://github.com/pionl/laravel-chunk-upload-example)
