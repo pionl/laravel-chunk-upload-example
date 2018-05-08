@@ -9,7 +9,7 @@ if ($fileUpload.length > 0 && $fileUploadDrop.length > 0) {
         // Use chunk size that is smaller than your maximum limit due a resumable issue
         // https://github.com/23/resumable.js/issues/51
         chunkSize: 1 * 1024 * 1024, // 1MB
-        simultaneousUploads: 1,
+        simultaneousUploads: 3,
         testChunks: false,
         throttleProgressCallbacks: 1,
         // Get the url from data-url tag

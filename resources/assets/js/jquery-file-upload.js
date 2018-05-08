@@ -9,7 +9,8 @@ if ($uploadList.length > 0 && $fileUpload.length > 0) {
     $fileUpload.fileupload({
         maxChunkSize: 1000000,
         method: "POST",
-        sequentialUploads: true,
+        // Not supported
+        sequentialUploads: false,
         formData: function (form) {
             // Append token to the request - required for web routes
             return [{name: '_token', value: $('input[name=_token]').val()}];

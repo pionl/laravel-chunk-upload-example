@@ -46,6 +46,7 @@ class UploadController extends Controller
 
         return response()->json([
             "done" => $handler->getPercentageDone(),
+            'status' => true
         ]);
     }
 

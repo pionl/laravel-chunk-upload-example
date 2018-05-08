@@ -9,7 +9,9 @@ if ($("#my-awesome-dropzone").length > 0) {
         chunking: true,
         method: "POST",
         maxFilesize: 400000000,
-        chunkSize: 1000000
+        chunkSize: 1000000,
+        // If true, the individual chunks of a file are being uploaded simultaneously.
+        parallelChunkUploads: true
     });
 
     // Append token to the request - required for web routes
