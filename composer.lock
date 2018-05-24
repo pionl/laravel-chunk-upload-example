@@ -910,12 +910,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pionl/laravel-chunk-upload.git",
-                "reference": "202eb34496f5c565b4507a22d9d02c8e801114b1"
+                "reference": "93915fb4f84af3fec30710b4e46c068d6de3880c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pionl/laravel-chunk-upload/zipball/202eb34496f5c565b4507a22d9d02c8e801114b1",
-                "reference": "202eb34496f5c565b4507a22d9d02c8e801114b1",
+                "url": "https://api.github.com/repos/pionl/laravel-chunk-upload/zipball/93915fb4f84af3fec30710b4e46c068d6de3880c",
+                "reference": "93915fb4f84af3fec30710b4e46c068d6de3880c",
                 "shasum": ""
             },
             "require": {
@@ -954,7 +954,7 @@
                 }
             ],
             "description": "Service for chunked upload with several js providers",
-            "time": "2018-05-08T12:52:54+00:00"
+            "time": "2018-05-24T12:51:29+00:00"
         },
         {
             "name": "psr/container",
