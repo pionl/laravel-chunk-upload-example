@@ -4,6 +4,9 @@
 # Installs and updates Laravel projects
 ###
 
+# Ensure that submodules are downloaded
+git submodule update --init
+
 echo "Updating example"
 
 # Go to example and install chunk upload

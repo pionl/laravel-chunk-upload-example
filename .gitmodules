@@ -1,3 +1,3 @@
 [submodule "laravel-chunk-upload"]
 	path = laravel-chunk-upload
-	url = git@github.com:pionl/laravel-chunk-upload.git
+	url = https://github.com/pionl/laravel-chunk-upload
