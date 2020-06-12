@@ -28,9 +28,11 @@ php 6.0/artisan serve
 
 # TODO
 
-- test all Laravel versions (use endpoint to check if uploaded file exists) - use puppeteer?
+- test all Laravel versions (use endpoint to check if uploaded file exists) - use puppeteer? Use sha1 to check if the file is correct.
 - Update install
 - Improve example controller
+- Fix 5.1
+- Fix 5.2
 
 ## Example code
 

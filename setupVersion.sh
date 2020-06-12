@@ -50,8 +50,5 @@ composer require pion/laravel-chunk-example-app
 
 php artisan vendor:publish --tag=public --force
 
-# Allow to browse uploaded files
-php artisan storage:link
-
 # Return back to root
 cd ..
