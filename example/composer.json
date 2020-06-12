@@ -1,0 +1,36 @@
+{
+    "name": "pion/laravel-chunk-example-app",
+    "authors": [
+        {
+            "name": "Martin Kluska",
+            "email": "martin@kluska.cz"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "pion/laravel-chunk-upload": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pion\\Laravel\\ChunkUploadExample\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pion\\Laravel\\ChunkUploadExample\\ExampleServiceProvider"
+            ]
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../laravel-chunk-upload/"
+        }
+    ]
+}

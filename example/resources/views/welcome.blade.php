@@ -1,0 +1,1 @@
+@extends('chunk-example::layout')

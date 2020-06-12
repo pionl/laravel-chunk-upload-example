@@ -1,57 +1,51 @@
 # Laravel chunked upload example
+
+> This example covers all supported Laravel versions. This implementation will allow us to test all versions at once.
+
 This repo contains full example for [laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) package.
-
-## Requiremenets
-
-* PHP >= 7.2.0
-* OpenSSL PHP Extension
-* PDO PHP Extension
-* Mbstring PHP Extension
-* Tokenizer PHP Extension
-* XML PHP Extension
-
-More at [laravel.com](https://laravel.com/docs/5.5)
 
 ## Installation
 
-```bash
-composer install
-npm install
-npm run dev
-cp .env.example .env
-php artisan key:generate
+**Install specific Laravel version. Use X.X version format.**
+
+```
+bash setup.sh 7.0
 ```
 
-## Versions
+**Install all supported Laravel versions**
 
-You can choose which version of laravel you are using.
-
-### Current branch (master) - Laravel 6.5
-
-### Laravel 5.5
-Full example with at [laravel-5-5 branch](https://github.com/pionl/laravel-chunk-upload-example/tree/laravel-5-5)
-
-### Laravel 5.4
-Full example with at [laravel-5-4 branch](https://github.com/pionl/laravel-chunk-upload-example/tree/laravel-5-4)
+```
+bash setup.sh 
+```
 
 ## Usage
 
-* Run serve `php artisan serve`
-* Open the root page `http://localhost:8000` and open the desired examples.
+> Run desired Laravel version and browse examples
+
+```
+php 6.0/artisan serve
+```
+
+# TODO
+
+- test all Laravel versions (use endpoint to check if uploaded file exists) - use puppeteer?
+- Update install
+- Improve example controller
 
 ## Example code
 
-* **Controller - dynamic usage** at [./app/Http/Controllers/UploadController.php](./app/Http/Controllers/UploadController.php)
-* **Views** at [./resources/views/example/](./resources/views/example/) - Here you can find basic layout for the providers.
-* **Javascripts** at [./resources/assets/js/](./resources/assets/js/) - Here you can find the initial setup for the providers.
+* **Controller - dynamic usage** at [./example/src/Http/Controllers/UploadController.php](./example/src/Http/Controllers/UploadController.php)
+* **Views** at [./example/resources/views/example/](./example/resources/views/example/) - Here you can find basic layout for the providers.
+* **Javascripts** at [./example/resources/assets/js/](./example/resources/assets/js/) - Here you can find the initial setup for the providers.
 
 ### Uploading to AMAZON s3 (or any other cloud storage)
 
-It is recommended to upload the file in separate queue JOB. Uploading can take a time (for large files) and the request could
-get timed out. It is important to stream the file to the cloud (not using `file_get_contents`) which would eat your memory. 
-Also don't forget to remove the uploaded file after upload.
+* It is recommended to upload the file in separate queue JOB. Uploading can take a time (for large files) and the request could
+get timed out.
+* It is important to stream the file to the cloud (not using `file_get_contents`) which would eat your memory. 
+* Also don't forget to remove the uploaded file after the upload.
 
-Example code found at [./app/Http/Controllers/UploadController.php](./app/Http/Controllers/UploadController.php#L59). 
+Example code found at [./example/sr/Http/Controllers/UploadController.php](./example/src/Http/Controllers/UploadController.php#L59). 
 
 ## Copyright and License
 
