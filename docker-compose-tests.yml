@@ -1,0 +1,15 @@
+version: '2'
+services:
+  codeceptjs:
+    image: codeception/codeceptjs
+    depends_on:
+      - laravel
+    volumes:
+      - .:/tests
+  laravel:
+    image: pionl/docker-php-laravel-ci:7.2
+    command: php /example/6.0/artisan serve --host=0.0.0.0 --port=8000
+    volumes:
+      - ./:/example
+    expose:
+      - 8000
