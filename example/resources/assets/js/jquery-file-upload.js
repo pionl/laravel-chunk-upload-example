@@ -27,7 +27,7 @@ if ($uploadList.length > 0 && $fileUpload.length > 0) {
         },
         done: function (e, data) {
             console.log(data, e);
-            $uploadList.append($('<li></li>').text('Uploaded: ' + data.result.path + ' ' + data.result.name));
+            $uploadList.append($('<li></li>').text('Uploaded: ' + data.result.path + data.result.name));
         }
     });
 }

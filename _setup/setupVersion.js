@@ -6,20 +6,15 @@ const deleteIfExists = require('./deleteIfExists.js');
 const getLaravelsRoutesPath = require('./getLaravelsRoutesPath.js');
 const modifyComposer = require('./composer/modifyComposer.js');
 const addServiceProvider = require('./addServiceProvider.js');
+const publish = require('./publish.js');
 
 /**
- * @param {Array} initGivenVersions
+ * @param {{laravel: string, image_version: string}} version
  * @param {string} currentDirectory
  * @param {boolean} verbose
  * @param {number} index
  */
-async function setupRecursively (initGivenVersions, currentDirectory, verbose, index = 0) {
-    if (typeof initGivenVersions[index] === 'undefined') {
-        return true;
-    }
-
-    /** @type {{laravel: string, image_version: string}} */
-    const version = initGivenVersions[index];
+async function setupVersion (version, currentDirectory, verbose, index = 0) {
     const numericLaravelVersion = parseFloat(
         version.laravel === 'dev-master' ? 999 : version.laravel.replace('.*', '')
     );
@@ -63,10 +58,7 @@ async function setupRecursively (initGivenVersions, currentDirectory, verbose, i
         addServiceProvider(path.resolve(versionDir, 'config', 'app.php'), exampleServiceProvider);
     }
 
-    const publishPackageArgs = ['artisan', 'vendor:publish', '--tag=public', '--force'];
-    await run('php', publishPackageArgs, versionDir, verbose);
-
-    return setupRecursively(initGivenVersions, currentDirectory, verbose, index + 1);
+    await publish(versionDir, verbose);
 }
 
-module.exports = setupRecursively
+module.exports = setupVersion

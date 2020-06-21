@@ -1,8 +1,9 @@
 const meow = require('meow');
 const colors = require('colors');
 const getVersions = require('./_setup/getVersions.js');
-const runTestsAndWait = require('./_setup/runTestsAndWait.js');
-const program = require('./_setup/program')
+const versionsRecursively = require('./_setup/versionsRecursively.js');
+const program = require('./_setup/program');
+const runTests = require('./_setup/runTests.js');
 
 const cli = meow(`
 	Run tests on all Laravel versions
@@ -22,19 +23,23 @@ const cli = meow(`
     }
 });
 
+
 /**
  * Runs tests for all versions or for specified version
  */
-program(
-    process,
-    cli,
-    'Running tests for',
-    async function () {
-        const currentDirectory = process.cwd()
-        const versions = getVersions(cli.input)
+async function main () {
+    const currentDirectory = process.cwd()
+    const versions = getVersions(cli.input)
 
-        await runTestsAndWait(versions, currentDirectory, cli.flags.verbose)
+    await versionsRecursively(versions, async function (version) {
+        const success = await runTests(version, currentDirectory, cli.flags.verbose);
 
-        console.log(colors.green('🎉 All tests passed'));
-    }
-)
+        if (success === false) {
+            throw Error('Tests failed')
+        }
+    })
+
+    console.log(colors.green('🎉 All tests passed'));
+}
+
+program(process, cli, 'Running tests for', main)

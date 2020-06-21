@@ -10,7 +10,9 @@
     "scripts": {
         "setup": "node setup.js",
         "test": "node tests.js",
-        "test-debug": "CODECEPT_DEBUG=true ./node_modules/.bin/codeceptjs run --steps"
+        "test-local": "./node_modules/.bin/codeceptjs run --steps --verbose",
+        "test-debug": "CODECEPT_DEBUG=true ./node_modules/.bin/codeceptjs run --steps --verbose",
+        "compile-example": "cd example && npm run dev"
     },
     "repository": {
         "type": "git",

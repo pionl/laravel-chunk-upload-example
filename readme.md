@@ -134,6 +134,10 @@ get timed out.
 
 Example code found at [./example/sr/Http/Controllers/UploadController.php](./example/src/Http/Controllers/UploadController.php#L59). 
 
+## Contribution in example
+
+* If you make changes in assets, do not forget to call `node compile.js` to compile the changes and publish them to all version (you can also pass desired version)
+
 # TODO
 
 - Improve example controller

@@ -3,10 +3,12 @@
 const meow = require('meow');
 const colors = require('colors');
 const path = require('path');
-const run = require('./_setup/runCommand.js')
-const setupRecursively = require('./_setup/setupRecursively.js');
+const run = require('./_setup/runCommand.js');
+const setupVersion = require('./_setup/setupVersion.js');
+const versionsRecursively = require('./_setup/versionsRecursively.js');
 const getVersions = require('./_setup/getVersions.js');
 const program = require('./_setup/program.js');
+const compileExample = require('./_setup/compileExample');
 
 const cli = meow(`
 	Install all Laravel versions
@@ -34,26 +36,26 @@ const cli = meow(`
     }
 });
 
-program(
-    process,
-    cli,
-    'Preparing',
-    async function () {
-        const currentDirectory = process.cwd();
-        const exampleDirectory = path.resolve(currentDirectory, 'example');
+async function main () {
+    const currentDirectory = process.cwd();
+    const exampleDirectory = path.resolve(currentDirectory, 'example');
 
-        if (cli.flags.ignoreExample === false) {
-            // Update the example
-            console.log(colors.green('🚀 Preparing example'))
-            console.log(' ')
+    if (cli.flags.ignoreExample === false) {
+        // Update the example
+        console.log(colors.green('🚀 Preparing example'))
+        console.log(' ')
 
-            await run('composer', ['update'], exampleDirectory, cli.flags.verbose)
-            await run('npm', ['install'], exampleDirectory, cli.flags.verbose)
-            await run('npm', ['run', 'dev'], exampleDirectory, cli.flags.verbose)
-        }
+        await run('composer', ['update'], exampleDirectory, cli.flags.verbose)
+        await run('npm', ['install'], exampleDirectory, cli.flags.verbose)
 
-        const useGivenVersions = getVersions(cli.input)
-
-        await setupRecursively(useGivenVersions, currentDirectory, cli.flags.verbose, 0)
+        await compileExample(exampleDirectory, cli.flags.verbose)
     }
-)
+
+    const useGivenVersions = getVersions(cli.input);
+
+    await versionsRecursively(useGivenVersions, async function (version) {
+        await setupVersion(version, currentDirectory, cli.flags.verbose)
+    });
+}
+
+program(process, cli, 'Preparing', main)
