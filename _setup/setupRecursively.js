@@ -20,7 +20,9 @@ async function setupRecursively (initGivenVersions, currentDirectory, verbose, i
 
     /** @type {{laravel: string, image_version: string}} */
     const version = initGivenVersions[index];
-    const numericLaravelVersion = parseFloat(version.laravel.replace('.*', ''));
+    const numericLaravelVersion = parseFloat(
+        version.laravel === 'dev-master' ? 999 : version.laravel.replace('.*', '')
+    );
     const versionDir = path.resolve(currentDirectory, version.laravel);
 
     console.log(colors.green('🚀 Running setup ') + colors.gray(`${version.laravel}`));

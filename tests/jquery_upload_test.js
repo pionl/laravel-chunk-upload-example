@@ -6,9 +6,9 @@ Scenario('is able to upload an image', async (I) => {
     I.amOnPage('/jquery-file-upload')
     I.see('jQuery File Upload')
 
+    // Upload and wait until file is uploaded
     I.attachFile('input[name=file]', 'test_image.jpeg');
-
-    I.waitForElement('#file-upload-list li:nth-child(2)', 2000);
+    I.waitForElement('#file-upload-list li:nth-child(2)', 40);
 
     const text = await I.grabTextFrom('#file-upload-list li:nth-child(2)')
 

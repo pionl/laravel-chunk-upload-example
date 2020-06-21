@@ -30,5 +30,9 @@
     {
         "laravel": "6.*",
         "image_version": "7.2"
+    },
+    {
+        "laravel": "7.*",
+        "image_version": "7.4"
     }
 ]

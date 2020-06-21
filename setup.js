@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-const meow = require('meow')
+const meow = require('meow');
 const colors = require('colors');
 const path = require('path');
 const run = require('./_setup/runCommand.js')
 const setupRecursively = require('./_setup/setupRecursively.js');
 const getVersions = require('./_setup/getVersions.js');
+const program = require('./_setup/program.js');
 
 const cli = meow(`
 	Install all Laravel versions
@@ -33,33 +34,26 @@ const cli = meow(`
     }
 });
 
-const currentDirectory = process.cwd();
-const exampleDirectory = path.resolve(currentDirectory, 'example');
+program(
+    process,
+    cli,
+    'Preparing',
+    async function () {
+        const currentDirectory = process.cwd();
+        const exampleDirectory = path.resolve(currentDirectory, 'example');
 
-console.log(colors.green('Preparing ' + cli.pkg.name));
-if (cli.flags.verbose === false) {
-    console.log(colors.gray('Having problem? Use --verbose'));
-}
-console.log(' ');
+        if (cli.flags.ignoreExample === false) {
+            // Update the example
+            console.log(colors.green('🚀 Preparing example'))
+            console.log(' ')
 
-(async () => {
-    if (cli.flags.ignoreExample === false) {
-        // Init the git submodule that should contain our local package
-        await run('git', ['submodule', 'update', '--init'], currentDirectory, cli.flags.verbose);
+            await run('composer', ['update'], exampleDirectory, cli.flags.verbose)
+            await run('npm', ['install'], exampleDirectory, cli.flags.verbose)
+            await run('npm', ['run', 'dev'], exampleDirectory, cli.flags.verbose)
+        }
 
-        // Update the example
-        console.log(colors.green('🚀 Preparing example'))
-        console.log(' ')
+        const useGivenVersions = getVersions(cli.input)
 
-        await run('composer', ['update'], exampleDirectory, cli.flags.verbose)
-        await run('npm', ['install'], exampleDirectory, cli.flags.verbose)
-        await run('npm', ['run', 'dev'], exampleDirectory, cli.flags.verbose)
+        await setupRecursively(useGivenVersions, currentDirectory, cli.flags.verbose, 0)
     }
-
-    const useGivenVersions = getVersions(cli.input)
-
-    await setupRecursively(useGivenVersions, currentDirectory, cli.flags.verbose, 0)
-})().catch(error => {
-    console.log(colors.red('🙈 ' + error.message));
-    process.exit(1)
-});
+)

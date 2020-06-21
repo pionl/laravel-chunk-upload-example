@@ -4,22 +4,29 @@ const getPreferredVersion = require('./getPreferredVersion.js');
 
 function getVersions (userInput) {
     // Track which versions should we init? All or given (in argument)
-    const useOnlyGivenVersion = getPreferredVersion(userInput)
-    const useGivenVersions = []
-    let noVersions = true
-    versions.forEach(version => {
-        if (useOnlyGivenVersion === null || version.laravel === useOnlyGivenVersion) {
-            noVersions = false
+    const useOnlyGivenVersion = getPreferredVersion(userInput);
+    const useGivenVersions = [];
+    let noVersions = true;
 
-            useGivenVersions.push(version)
+    versions.forEach(version => {
+        const preferredVersion = version.laravel === useOnlyGivenVersion;
+        if (useOnlyGivenVersion === null || preferredVersion) {
+            noVersions = false;
+
+            // Ignore pre-release while using all versions
+            if (preferredVersion === false && version.pre_release === true) {
+                return true;
+            }
+
+            useGivenVersions.push(version);
         }
     })
 
     if (noVersions) {
-        throw new Error('✋ Given versions does not exists')
+        throw new Error('✋ Given versions does not exists');
     }
 
-    return useGivenVersions
+    return useGivenVersions;
 }
 
 module.exports = getVersions

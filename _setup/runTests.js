@@ -37,7 +37,8 @@ async function runTests (version, currentDirectory, verbose) {
         // OSX - segmentation fault bud tests are ok
         // Determine folder that docker-compose uses
         const folder = path.relative(path.dirname(currentDirectory), currentDirectory)
-        if (error.stdout.indexOf(folder + '_codeceptjs_1 exited with code 0') !== -1) {
+        if (typeof error.stdout === 'string'
+            && error.stdout.indexOf(folder + '_codeceptjs_1 exited with code 0') !== -1) {
             console.log(' ')
             return true;
         }

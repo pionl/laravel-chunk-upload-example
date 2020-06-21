@@ -1,5 +1,6 @@
 /.idea
 
+# Ignore all Laravel instalations
 /*.*/
-/old/
+/dev-master/
 /output/

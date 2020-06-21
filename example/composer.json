@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "pion/laravel-chunk-upload": "dev-master"
+        "pion/laravel-chunk-upload": "*"
     },
     "autoload": {
         "psr-4": {

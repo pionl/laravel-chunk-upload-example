@@ -2,6 +2,7 @@ const meow = require('meow');
 const colors = require('colors');
 const getVersions = require('./_setup/getVersions.js');
 const runTestsAndWait = require('./_setup/runTestsAndWait.js');
+const program = require('./_setup/program')
 
 const cli = meow(`
 	Run tests on all Laravel versions
@@ -12,26 +13,28 @@ const cli = meow(`
 	Examples
 	  $ node tests.js
 	  $ node tests.js "7.*"
-`);
-
-console.log(colors.green('Running tests for ' + cli.pkg.name));
-if (cli.flags.verbose === false) {
-    console.log(colors.gray('Want to see logs? Use --verbose'));
-}
-console.log(' ');
+`, {
+    flags: {
+        verbose: {
+            type: 'boolean',
+            alias: 'v'
+        }
+    }
+});
 
 /**
  * Runs tests for all versions or for specified version
  */
-(async () => {
-    const currentDirectory = process.cwd()
-    const versions = getVersions(cli.input)
+program(
+    process,
+    cli,
+    'Running tests for',
+    async function () {
+        const currentDirectory = process.cwd()
+        const versions = getVersions(cli.input)
 
-    await runTestsAndWait(versions, currentDirectory, cli.flags.verbose)
+        await runTestsAndWait(versions, currentDirectory, cli.flags.verbose)
 
-    console.log(colors.green('🎉 All tests passed'));
-})().catch(error => {
-    console.log(colors.red('🙈 ' + error.message));
-    process.exit(1)
-});
-
+        console.log(colors.green('🎉 All tests passed'));
+    }
+)

@@ -5,7 +5,7 @@ services:
       - IMAGE_VERSION
       - LARAVEL_VERSION
     image: "pionl/docker-php-laravel-ci:${IMAGE_VERSION}"
-    command: php /example/${LARAVEL_VERSION}/artisan serve --host=0.0.0.0 --port=8000 -q
+    command: php /example/${LARAVEL_VERSION}/artisan serve --host=0.0.0.0 --port=8000
     volumes:
       - ./:/example
     ports:
