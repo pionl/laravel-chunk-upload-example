@@ -1,3 +1,6 @@
 [submodule "laravel-chunk-upload"]
 	path = laravel-chunk-upload
 	url = https://github.com/pionl/laravel-chunk-upload
+[submodule "wait-for-it"]
+	path = wait-for-it
+	url = git@github.com:vishnubob/wait-for-it.git

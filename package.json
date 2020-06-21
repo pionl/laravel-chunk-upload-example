@@ -1,0 +1,28 @@
+{
+  "name": "laravel-chunk-upload-example",
+  "version": "1.0.0",
+  "description": "> This example covers all supported Laravel versions. This implementation will allow us to test all versions at once.",
+  "main": "init.js",
+  "directories": {
+    "example": "example",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pionl/laravel-chunk-upload-example.git"
+  },
+  "author": "Martin Kluska <martin@kluska.cz>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pionl/laravel-chunk-upload-example/issues"
+  },
+  "homepage": "https://github.com/pionl/laravel-chunk-upload-example#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "execa": "^4.0.2",
+    "meow": "^7.0.1"
+  }
+}

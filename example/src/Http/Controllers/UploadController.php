@@ -1,6 +1,7 @@
 <?php
 namespace Pion\Laravel\ChunkUploadExample\Http\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\JsonResponse;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadFailedException;
 use Storage;
@@ -11,7 +12,7 @@ use Pion\Laravel\ChunkUpload\Handler\AbstractHandler;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
-class UploadController
+class UploadController extends BaseController
 {
     /**
      * Handles the file upload

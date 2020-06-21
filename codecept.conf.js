@@ -1,15 +1,20 @@
+const url = process.env.CODECEPT_URL || 'http://localhost:8000'
+
 exports.config = {
     tests: 'tests/*_test.js',
     output: './output',
     helpers: {
         Puppeteer: {
-            url: 'http://laravel:8000',
-            show: false,
+            url: url,
+            show: process.env.CODECEPT_DEBUG ? true : false,
             windowSize: '1200x900',
             waitForNavigation: "networkidle0",
             chrome: {
-                args: ["--headless", "--no-sandbox" ]
+                args: process.env.CODECEPT_DEBUG ? [] : ["--headless", "--no-sandbox"]
             }
+        },
+        REST: {
+            endpoint: url,
         }
     },
     include: {
@@ -22,8 +27,5 @@ exports.config = {
         retryFailedStep: {
             enabled: true
         },
-        screenshotOnFail: {
-            enabled: true
-        }
     }
 }

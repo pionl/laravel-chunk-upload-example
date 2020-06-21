@@ -4,35 +4,87 @@
 
 This repo contains full example for [laravel-chunk-upload](https://github.com/pionl/laravel-chunk-upload) package.
 
-## Installation
+## Install
 
-**Install specific Laravel version. Use X.X version format.**
+**Install specific Laravel version. Use X.* version format.**
 
 ```
-bash setup.sh 7.0
+node setup.js "7.*"
 ```
 
 **Install all supported Laravel versions**
 
 ```
-bash setup.sh 
+node setup.js
 ```
+
 
 ## Usage
 
 > Run desired Laravel version and browse examples
 
 ```
-php 6.0/artisan serve
+php 7.\*/artisan serve --host=0.0.0.0 --port=8000
 ```
+
+or 
+
+```bash
+IMAGE_VERSION=7.4 LARAVEL_VERSION=7.\* docker-compose -f docker-compose.yml up
+```
+
+## Tests
+
+**Run tests on all Laravel versions (install them before using it)**
+
+```
+node tests.js
+```
+
+**Run tests on desired Laravel version**
+
+```
+node tests.js "7.*"
+```
+
+### Tests locally
+
+> Install codeceptjs and puppeteer globally
+
+* In one terminal run `php 7.\*/artisan serve --host=0.0.0.0 --port=8000`
+* In second terminal run tests `codeceptjs run --steps`
+* `CODECEPT_DEBUG=true codeceptjs run --steps` will show browser while tests are running.
+
+### Docker-compose
+
+* Environment variables should be passed: `IMAGE_VERSION` (php version) and `LARAVEL_VERSION`.
+* `abort-on-container-exit` needs to be used to stop Laravel server.
+
+```bash
+IMAGE_VERSION=7.2 LARAVEL_VERSION=6.\* docker-compose -f docker-compose.yml -f docker-compose-tests.yml up --abort-on-container-exit
+```
+
+## Adding a support for new Laravel release
+
+* Add a new version to `versions.json` file.
+* Update `laravel-chunk-upload` repository (use your fork/PR or desired branch)
+    * For PR or your repository
+    ```bash
+    cd laravel-chunk-upload
+    git checkout -b drjdr-master master
+    git pull https://github.com/drjdr/laravel-chunk-upload.git master
+    cd ..
+    ```
+* Use setup on new version `node setup.js "X.*`.
+* Run tests on new version `node tests.js "X.*`.
+* Run tests on all versions `node tests.js "X.*`.
 
 # TODO
 
 - test all Laravel versions (use endpoint to check if uploaded file exists) - use puppeteer? Use sha1 to check if the file is correct.
 - Update install
 - Improve example controller
-- Fix 5.1
-- Fix 5.2
+- Add tests to dropzone
 
 ## Example code
 
@@ -55,4 +107,4 @@ Example code found at [./example/sr/Http/Controllers/UploadController.php](./exa
 was written by [Martin Kluska](http://kluska.cz) and is released under the 
 [MIT License](LICENSE.md).
 
-Copyright (c) 2017 Martin Kluska
+Copyright (c) 2017 and beyond Martin Kluska
