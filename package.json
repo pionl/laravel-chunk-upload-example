@@ -1,20 +1,35 @@
 {
-  "private": true,
-  "scripts": {
-    "dev": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "watch": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "hot": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production": "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
-  },
-  "devDependencies": {
-    "bootstrap-sass": "^3.3.7",
-    "cross-env": "^5.1.3",
-    "imports-loader": "^0.7.1",
-    "jquery": "^3.3.1",
-    "laravel-mix": "^1.7.2",
-    "lodash": "^4.16.2"
-  },
-  "dependencies": {
-    "resumablejs": "^1.1.0"
-  }
+    "name": "laravel-chunk-upload-example",
+    "version": "1.0.0",
+    "description": "> This example covers all supported Laravel versions. This implementation will allow us to test all versions at once.",
+    "main": "init.js",
+    "directories": {
+        "example": "example",
+        "test": "tests"
+    },
+    "scripts": {
+        "setup": "node setup.js",
+        "test": "node tests.js",
+        "test-debug": "CODECEPT_DEBUG=true ./node_modules/.bin/codeceptjs run --steps"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pionl/laravel-chunk-upload-example.git"
+    },
+    "author": "Martin Kluska <martin@kluska.cz>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pionl/laravel-chunk-upload-example/issues"
+    },
+    "homepage": "https://github.com/pionl/laravel-chunk-upload-example#readme",
+    "dependencies": {
+        "colors": "^1.4.0",
+        "execa": "^4.0.2",
+        "markdown-table": "^2.0.0",
+        "meow": "^7.0.1"
+    },
+    "devDependencies": {
+        "puppeteer": "^4.0.0",
+        "codeceptjs": "^2.6.6"
+    }
 }

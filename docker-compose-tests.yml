@@ -1,0 +1,11 @@
+version: '3'
+services:
+  codeceptjs:
+    image: codeception/codeceptjs
+    environment:
+      - CODECEPT_URL=http://laravel:8000
+    command: ["./wait-for-it/wait-for-it.sh", "--strict", "laravel:8000", "--", "codeceptjs", "run", "--steps"]
+    depends_on:
+      - laravel
+    volumes:
+      - .:/tests

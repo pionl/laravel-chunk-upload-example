@@ -1,0 +1,38 @@
+[
+    {
+        "laravel": "5.2.*",
+        "image_version": "7.1"
+    },
+    {
+        "laravel": "5.3.*",
+        "image_version": "7.1"
+    },
+    {
+        "laravel": "5.4.*",
+        "image_version": "7.2"
+    },
+    {
+        "laravel": "5.5.*",
+        "image_version": "7.2"
+    },
+    {
+        "laravel": "5.6.*",
+        "image_version": "7.2"
+    },
+    {
+        "laravel": "5.7.*",
+        "image_version": "7.2"
+    },
+    {
+        "laravel": "5.8.*",
+        "image_version": "7.2"
+    },
+    {
+        "laravel": "6.*",
+        "image_version": "7.2"
+    },
+    {
+        "laravel": "7.*",
+        "image_version": "7.4"
+    }
+]
