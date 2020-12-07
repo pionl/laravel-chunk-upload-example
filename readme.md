@@ -23,7 +23,7 @@ npm install --only=production
 **Install specific Laravel version. Use X.\* version format.**
 
 ```
-node setup.js "7.*"
+node setup.js "8.*"
 ```
 
 **Install all supported Laravel versions**
@@ -50,6 +50,7 @@ IMAGE_VERSION=7.4 LARAVEL_VERSION=7.\* docker-compose -f docker-compose.yml up
 
 | Folder | Laravel version | Setup                   | Tests                   |                                                        |
 | ------ | --------------- | ----------------------- | ----------------------- | ------------------------------------------------------ |
+| 8.*    | v8.17.2         | `node setup.js "8.*"`   | `node tests.js "8.*"`   | `php 8.\*/artisan serve  --host=0.0.0.0 --port=8000`   |
 | 7.*    | v7.16.1         | `node setup.js "7.*"`   | `node tests.js "7.*"`   | `php 7.\*/artisan serve  --host=0.0.0.0 --port=8000`   |
 | 6.*    | v6.18.20        | `node setup.js "6.*"`   | `node tests.js "6.*"`   | `php 6.\*/artisan serve  --host=0.0.0.0 --port=8000`   |
 | 5.8.*  | v5.8.38         | `node setup.js "5.8.*"` | `node tests.js "5.8.*"` | `php 5.8.\*/artisan serve  --host=0.0.0.0 --port=8000` |
@@ -71,7 +72,7 @@ node tests.js
 **Run tests on desired Laravel version**
 
 ```
-node tests.js "7.*"
+node tests.js "8.*"
 ```
 
 ### Tests locally
@@ -88,7 +89,7 @@ node tests.js "7.*"
 * `abort-on-container-exit` needs to be used to stop Laravel server.
 
 ```bash
-IMAGE_VERSION=7.2 LARAVEL_VERSION=6.\* docker-compose -f docker-compose.yml -f docker-compose-tests.yml up --abort-on-container-exit
+IMAGE_VERSION=7.4 LARAVEL_VERSION=8.\* docker-compose -f docker-compose.yml -f docker-compose-tests.yml up --abort-on-container-exit
 ```
 
 ## Running tests on latest Laravel release

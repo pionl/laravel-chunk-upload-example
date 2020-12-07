@@ -34,5 +34,9 @@
     {
         "laravel": "7.*",
         "image_version": "7.4"
+    },
+    {
+        "laravel": "8.*",
+        "image_version": "7.4"
     }
 ]

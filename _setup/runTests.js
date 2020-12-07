@@ -32,19 +32,12 @@ async function runTests (version, currentDirectory, verbose) {
         const result = await run(
             'docker-compose', dockerComposeArgs, currentDirectory, verbose, environmentVars
         );
-        return result.exitCode !== 0
-    } catch (error) {
-        // OSX - segmentation fault bud tests are ok
-        // Determine folder that docker-compose uses
-        const folder = path.relative(path.dirname(currentDirectory), currentDirectory)
-        if (typeof error.stdout === 'string'
-            && error.stdout.indexOf(folder + '_codeceptjs_1 exited with code 0') !== -1) {
-            console.log(' ')
-            return true;
-        }
 
+        return result.exitCode === 0
+    } catch (error) {
         const message = error.shortMessage || error.message;
         console.log(colors.red('🙈 ' + message));
+        console.log(error.stdout)
         return false;
     }
 }
