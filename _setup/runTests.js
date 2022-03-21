@@ -17,7 +17,8 @@ async function runTests (version, currentDirectory, verbose) {
         '-f',
         'docker-compose-tests.yml',
         'up',
-        '--abort-on-container-exit'
+        '--abort-on-container-exit',
+        '--build'
     ];
     const environmentVars = {
         IMAGE_VERSION: version.image_version,

@@ -27,7 +27,7 @@
         </div>
         @yield('content')
         @if (isset($code))
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Show code</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Show code</button>
 
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -35,7 +35,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
+                                    aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Code</h4>
                         </div>
                         <div class="modal-body">
@@ -49,12 +49,13 @@
             </div>
         @endif
     </div>
-    <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    @yield('body-end')
-    <script src="{{ asset('/chunk-example/js/app.js') }}"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+</div>
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+@yield('body-end')
+<script src="{{ asset('/chunk-example/js/app.js') }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

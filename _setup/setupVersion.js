@@ -20,8 +20,15 @@ async function setupVersion (version, currentDirectory, verbose, index = 0) {
     );
     const versionDir = path.resolve(currentDirectory, version.laravel);
 
+
     console.log(colors.green('🚀 Running setup ') + colors.gray(`${version.laravel}`));
     console.log('');
+
+    if (verbose) {
+        console.log('Directory: ',currentDirectory);
+        console.log('Version directory: ',versionDir);
+    }
+
 
     // Update or install Laravel project
     if (fs.existsSync(versionDir)) {

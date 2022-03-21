@@ -31,7 +31,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../laravel-chunk-upload/"
+            "url": "../laravel-chunk-upload"
         }
     ]
 }

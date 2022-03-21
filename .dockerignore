@@ -1,0 +1,8 @@
+/node_modules
+/tests
+/wait-for-it
+/package-lock.json
+
+/example/package-lock.json
+/example/vendor
+/example/composer.lock

@@ -23,7 +23,7 @@ function getVersions (userInput) {
     })
 
     if (noVersions) {
-        throw new Error('✋ Given versions does not exists');
+        throw new Error('✋ Given version does not exists: ' + useOnlyGivenVersion);
     }
 
     return useGivenVersions;

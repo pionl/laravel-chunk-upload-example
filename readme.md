@@ -20,48 +20,34 @@ npm install --only=production
 
 ## Usage
 
-**Install specific Laravel version. Use X.\* version format.**
+**Install and run specific Laravel version. Use X.\* version format.**
 
 ```
-node setup.js "8.*"
-```
-
-**Install all supported Laravel versions**
-
-```
-node setup.js
+node run.js "8.*"
 ```
 
 > Pass --ignore-example to ignore updating and building example
+> Pass --verbose for debug info
 
-**Run desired Laravel version and browse examples**
 
-```
-php 7.\*/artisan serve --host=0.0.0.0 --port=8000
-```
-
-or 
-
-```bash
-IMAGE_VERSION=7.4 LARAVEL_VERSION=7.\* docker-compose -f docker-compose.yml up
-```
+open http://localhost:8000
 
 ## Compatibility 
 
-| Folder | Laravel version | Setup                   | Tests                   |                                                        |
-| ------ | --------------- | ----------------------- | ----------------------- | ------------------------------------------------------ |
-| 8.*    | v8.17.2         | `node setup.js "8.*"`   | `node tests.js "8.*"`   | `php 8.\*/artisan serve  --host=0.0.0.0 --port=8000`   |
-| 7.*    | v7.16.1         | `node setup.js "7.*"`   | `node tests.js "7.*"`   | `php 7.\*/artisan serve  --host=0.0.0.0 --port=8000`   |
-| 6.*    | v6.18.20        | `node setup.js "6.*"`   | `node tests.js "6.*"`   | `php 6.\*/artisan serve  --host=0.0.0.0 --port=8000`   |
-| 5.8.*  | v5.8.38         | `node setup.js "5.8.*"` | `node tests.js "5.8.*"` | `php 5.8.\*/artisan serve  --host=0.0.0.0 --port=8000` |
-| 5.7.*  | v5.7.29         | `node setup.js "5.7.*"` | `node tests.js "5.7.*"` | `php 5.7.\*/artisan serve  --host=0.0.0.0 --port=8000` |
-| 5.6.*  | v5.6.40         | `node setup.js "5.6.*"` | `node tests.js "5.6.*"` | `php 5.6.\*/artisan serve  --host=0.0.0.0 --port=8000` |
-| 5.5.*  | v5.5.49         | `node setup.js "5.5.*"` | `node tests.js "5.5.*"` | `php 5.5.\*/artisan serve  --host=0.0.0.0 --port=8000` |
-| 5.4.*  | v5.4.36         | `node setup.js "5.4.*"` | `node tests.js "5.4.*"` | `php 5.4.\*/artisan serve  --host=0.0.0.0 --port=8000` |
-| 5.3.*  | v5.3.31         | `node setup.js "5.3.*"` | `node tests.js "5.3.*"` | `php 5.3.\*/artisan serve  --host=0.0.0.0 --port=8000` |
-| 5.2.*  | v5.2.45         | `node setup.js "5.2.*"` | `node tests.js "5.2.*"` | `php 5.2.\*/artisan serve  --host=0.0.0.0 --port=8000` |
+| Version | PHP         | Run               | Tests                 |
+| ------- | ----------- | ----------------- | --------------------- |
+| 9.*     | 8.1-node-17 | `node run  "9.*"` | `node tests.js "9.*"` |
+| 9.*     | 8.0-node-17 | `node run  "9.*"` | `node tests.js "9.*"` |
+| 8.*     | 8.1-node-17 | `node run  "8.*"` | `node tests.js "8.*"` |
+| 8.*     | 8.0-node-17 | `node run  "8.*"` | `node tests.js "8.*"` |
+| 8.*     | 7.4-node-17 | `node run  "8.*"` | `node tests.js "8.*"` |
+| 7.*     | 7.4-node-17 | `node run  "7.*"` | `node tests.js "7.*"` |
+
+
 
 ## Tests
+
+> Pass --verbose for debug info
 
 **Run tests on all Laravel versions (install them before using it)**
 
@@ -77,7 +63,7 @@ node tests.js "8.*"
 
 ### Tests locally
 
-> Run `npm install` without production
+> Run `npm install` without production. 
 
 * In one terminal run `php 7.\*/artisan serve --host=0.0.0.0 --port=8000`
 * In second terminal run tests `./node_modules/.bin/codeceptjs run --steps`
