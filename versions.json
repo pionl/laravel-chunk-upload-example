@@ -22,5 +22,17 @@
     {
         "laravel": "9.*",
         "image_version": "8.1-node-17"
+    },
+    {
+        "laravel": "9.*",
+        "image_version": "8.2-node-18"
+    },
+    {
+        "laravel": "10.*",
+        "image_version": "8.1-node-17"
+    },
+    {
+        "laravel": "10.*",
+        "image_version": "8.2-node-18"
     }
 ]

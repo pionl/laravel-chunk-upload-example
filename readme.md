@@ -34,16 +34,14 @@ open http://localhost:8000
 
 ## Compatibility 
 
-| Version | PHP         | Run               | Tests                 |
-| ------- | ----------- | ----------------- | --------------------- |
-| 9.*     | 8.1-node-17 | `node run  "9.*"` | `node tests.js "9.*"` |
-| 9.*     | 8.0-node-17 | `node run  "9.*"` | `node tests.js "9.*"` |
-| 8.*     | 8.1-node-17 | `node run  "8.*"` | `node tests.js "8.*"` |
-| 8.*     | 8.0-node-17 | `node run  "8.*"` | `node tests.js "8.*"` |
-| 8.*     | 7.4-node-17 | `node run  "8.*"` | `node tests.js "8.*"` |
-| 7.*     | 7.4-node-17 | `node run  "7.*"` | `node tests.js "7.*"` |
+> Current version of laravel-chunk-upload is tested against: 
 
-
+| Laravel | PHP                                   | Run               | Tests                  |
+|---------|---------------------------------------|-------------------|------------------------|
+| 10.*    | 8.1-node-17, 8.2-node-18              | `node run "10.*"` | `node tests.js "10.*"` |
+| 9.*     | 8.0-node-17, 8.1-node-17, 8.2-node-18 | `node run "9.*"`  | `node tests.js "9.*"`  |
+| 8.*     | 7.4-node-17, 8.0-node-17, 8.1-node-17 | `node run "8.*"`  | `node tests.js "8.*"`  |
+| 7.*     | 7.4-node-17                           | `node run "7.*"`  | `node tests.js "7.*"`  |
 
 ## Tests
 
@@ -99,11 +97,14 @@ IMAGE_VERSION=7.4 LARAVEL_VERSION=8.\* docker-compose -f docker-compose.yml -f d
 
 ## Adding a support for new Laravel release
 
+- Docker + docker compose installed
+- Node.js installed
+
 > Do not commit your changes - use pull request in main repo 
 
 * Add a new version to `versions.json` file.
 * Add your changes to `laravel-chunk-upload` folder
-* Use setup and tests on new version `node setup.js "7.\*" && node tests.js "7.\*"`
+* Test the Laravel version `node tests.js "10.\*"`
 * Run tests on all versions `node tests.js` to ensure backward compatibility.
 
 ## Example code

@@ -8,5 +8,7 @@ COPY . .
 RUN npm install
 
 ARG LARAVEL_VERSION
+
+RUN composer self-update
 RUN node setup.js ${LARAVEL_VERSION} --verbose
 
