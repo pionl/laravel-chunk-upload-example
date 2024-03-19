@@ -34,5 +34,9 @@
     {
         "laravel": "10.*",
         "image_version": "8.2-node-18"
+    },
+    {
+        "laravel": "11.*",
+        "image_version": "8.2-node-20"
     }
 ]
