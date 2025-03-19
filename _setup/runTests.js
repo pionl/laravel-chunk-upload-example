@@ -1,6 +1,13 @@
 const run = require('./runCommand.js');
 const colors = require('colors');
-const path = require('path');
+
+function cleanString (string) {
+    const replace = ['.', '*']
+    replace.forEach(function (char) {
+        string = string.replace(char, '')
+    })
+    return string
+}
 
 /**
  * Returns true if the test was successful.
@@ -13,6 +20,7 @@ const path = require('path');
 async function runTests (version, currentDirectory, verbose) {
     const dockerComposeArgs = [
         'compose',
+        `-p=chunk-laravel-${cleanString(version.image_version)}-${cleanString(version.laravel)}`,
         '-f',
         'docker-compose.yml',
         '-f',

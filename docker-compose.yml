@@ -1,5 +1,6 @@
 services:
   laravel:
+    image: i-chunk-laravel:${IMAGE_VERSION}
     build:
       context: .
       dockerfile: Dockerfile

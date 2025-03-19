@@ -27,7 +27,7 @@ function getVersions (userInput) {
         throw new Error('✋ Given version does not exists: ' + useOnlyGivenVersion);
     }
 
-    return useGivenVersions;
+    return useGivenVersions.reverse();
 }
 
 module.exports = getVersions

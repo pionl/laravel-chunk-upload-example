@@ -1,4 +1,7 @@
 services:
+  laravel:
+    ports: []
+
   codeceptjs:
     image: codeception/codeceptjs
     environment:

@@ -27,6 +27,9 @@ const cli = meow(`
 /**
  * Runs tests for all versions or for specified version
  */
+let table = [
+    ['Laravel version', 'Image version', 'Status'] // TODO rendeer the output per version in table
+];
 async function main () {
     const currentDirectory = process.cwd()
     const versions = getVersions(cli.input)
@@ -37,7 +40,7 @@ async function main () {
         if (success === false) {
             throw Error('Tests failed')
         }
-    })
+    }, cli.flags.verbose)
 
     console.log(colors.green('🎉 All tests passed'));
 }

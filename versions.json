@@ -40,6 +40,14 @@
         "image_version": "8.2-node-20"
     },
     {
+        "laravel": "11.*",
+        "image_version": "8.3-node-22"
+    },
+    {
+        "laravel": "11.*",
+        "image_version": "8.4-node-22"
+    },
+    {
         "laravel": "12.*",
         "image_version": "8.2-node-20"
     },

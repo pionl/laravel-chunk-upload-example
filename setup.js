@@ -54,9 +54,16 @@ async function main () {
     const useGivenVersions = getVersions(cli.input);
 
     console.log('Setting up versions: ', useGivenVersions)
+    const versionsInstalled = {}
     await versionsRecursively(useGivenVersions, async function (version) {
+        // Do not install the same version twice (we have same L version for each PHP image version)
+        if (versionsInstalled[version.laravel]) {
+            return;
+        }
+
         await setupVersion(version, currentDirectory, cli.flags.verbose)
-    });
+        versionsInstalled[version.laravel] = true;
+    }, cli.flags.verbose);
 }
 
 program(process, cli, 'Preparing', main)
