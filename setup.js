@@ -53,6 +53,7 @@ async function main () {
 
     const useGivenVersions = getVersions(cli.input);
 
+    console.log('Setting up versions: ', useGivenVersions)
     await versionsRecursively(useGivenVersions, async function (version) {
         await setupVersion(version, currentDirectory, cli.flags.verbose)
     });

@@ -12,6 +12,7 @@ const path = require('path');
  */
 async function runTests (version, currentDirectory, verbose) {
     const dockerComposeArgs = [
+        'compose',
         '-f',
         'docker-compose.yml',
         '-f',
@@ -31,7 +32,7 @@ async function runTests (version, currentDirectory, verbose) {
         console.log(`${versionMessage} ${imageVersionMessage}`)
 
         const result = await run(
-            'docker-compose', dockerComposeArgs, currentDirectory, verbose, environmentVars
+            'docker', dockerComposeArgs, currentDirectory, verbose, environmentVars
         );
 
         return result.exitCode === 0

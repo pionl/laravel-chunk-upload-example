@@ -44,7 +44,8 @@ Open http://localhost:8000
 
 | Laravel | PHP                                   | Run               | Tests                  |
 |---------|---------------------------------------|-------------------|------------------------|
-| 10.*    | 8.2-node-20, 8.2-node-20              | `node run "11.*"` | `node tests.js "11.*"` |
+| 12.*    | 8.2-node-20                           | `node run "12.*"` | `node tests.js "12.*"` |
+| 11.*    | 8.2-node-20                           | `node run "11.*"` | `node tests.js "11.*"` |
 | 10.*    | 8.1-node-17, 8.2-node-18              | `node run "10.*"` | `node tests.js "10.*"` |
 | 9.*     | 8.0-node-17, 8.1-node-17, 8.2-node-18 | `node run "9.*"`  | `node tests.js "9.*"`  |
 | 8.*     | 7.4-node-17, 8.0-node-17, 8.1-node-17 | `node run "8.*"`  | `node tests.js "8.*"`  |
@@ -78,8 +79,10 @@ node tests.js "8.*"
 * `abort-on-container-exit` needs to be used to stop the Laravel server.
 
 ```bash
-IMAGE_VERSION=7.4 LARAVEL_VERSION=8.\* docker-compose -f docker-compose.yml -f docker-compose-tests.yml up --abort-on-container-exit
+IMAGE_VERSION=8.2-node-20 LARAVEL_VERSION=12.\* docker compose -f docker-compose.yml -f docker-compose-tests.yml up --abort-on-container-exit
 ```
+
+We are using docker images built for [Laravel](https://github.com/pionl/docker-php-laravel-ci)
 
 ## Testing Your Contribution
 
@@ -92,6 +95,12 @@ IMAGE_VERSION=7.4 LARAVEL_VERSION=8.\* docker-compose -f docker-compose.yml -f d
 pr.sh <your-github-username> <branch = default is master> <repository-name = laravel-chunk-upload>
 ```
 * Run tests on all versions with `node tests.js` to ensure backward compatibility.
+
+### Getting current master when PR is merged
+
+```
+bash update.sh
+```
 
 ## Adding Support for a New Laravel Release
 

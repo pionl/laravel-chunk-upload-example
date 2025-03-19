@@ -12,7 +12,9 @@ async function versionsRecursively (versions, onVersion, versionIndex = 0) {
 
     const version = versions[versionIndex];
 
+
     await onVersion(version)
+
 
     return versionsRecursively(versions, onVersion, versionIndex + 1)
 }

@@ -10,6 +10,7 @@ function getVersions (userInput) {
 
     versions.forEach(version => {
         const preferredVersion = version.laravel === useOnlyGivenVersion;
+
         if (useOnlyGivenVersion === null || preferredVersion) {
             noVersions = false;
 

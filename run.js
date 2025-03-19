@@ -39,7 +39,8 @@ async function main () {
     }
 
     await versionsRecursively(useGivenVersions, async function (version) {
-        await run('docker-compose', ['up', '--build'], currentDirectory, cli.flags.verbose, {
+
+        await run('docker', ['compose', 'up', '--build'], currentDirectory, cli.flags.verbose, {
             IMAGE_VERSION: version.image_version,
             LARAVEL_VERSION: version.laravel,
         } );
