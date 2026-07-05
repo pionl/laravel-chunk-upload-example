@@ -56,6 +56,8 @@ async function main () {
             version.image_version,
             success ? '✅' : '🟥'
         ])
+        console.log(table(tableContents));
+        console.log(' ')
     }, cli.flags.verbose, true)
 
     console.log(colors.green('🎉 All tests passed'));

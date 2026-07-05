@@ -6,8 +6,8 @@ const run = require('./runCommand.js');
  * @return {Promise<void>}
  */
 async function publish (versionDir, verbose) {
-    const publishPackageArgs = ['artisan', 'vendor:publish', '--tag=public', '--force'];
-    await run('php', publishPackageArgs, versionDir, verbose);
+    await run('php', ['artisan', 'vendor:publish', '--tag=public', '--force'], versionDir, verbose);
+    await run('php', ['artisan', 'vendor:publish', '--provider=Pion\\Laravel\\ChunkUpload\\Providers\\ChunkUploadServiceProvider', '--force'], versionDir, verbose);
 }
 
 module.exports = publish

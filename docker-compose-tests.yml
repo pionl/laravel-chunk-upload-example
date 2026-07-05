@@ -1,6 +1,9 @@
 services:
   playwright:
-    image: mcr.microsoft.com/playwright:v1.61.1-noble
+    image: laravel-chunk-upload-playwright:1.61.1
+    build:
+      context: .
+      dockerfile: Dockerfile.playwright
     environment:
       - PLAYWRIGHT_BASE_URL=http://laravel:8000
     working_dir: /work
@@ -8,9 +11,10 @@ services:
       [
         "bash",
         "-lc",
-        "npm ci && ./wait-for-it/wait-for-it.sh --strict laravel:8000 -- npx playwright test"
+        "./wait-for-it/wait-for-it.sh --strict laravel:8000 -- playwright test"
       ]
     depends_on:
       - laravel
     volumes:
       - .:/work
+      - /work/node_modules
