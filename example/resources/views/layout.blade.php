@@ -8,7 +8,7 @@
     <title>@yield('page-title', 'Laravel chunked upload')</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="/chunk-example/css/app.css"/>
+    @vite(['resources/assets/sass/app.scss'])
     @yield('head')
 </head>
 <body>
@@ -17,6 +17,10 @@
         <div class="title m-b-md">
             @yield('page-title', 'Laravel chunked upload')
         </div>
+        <p>
+            Laravel: {{ app()->version() }}, PHP: {{ PHP_VERSION }}
+        </p>
+        <hr/>
         {{ csrf_field() }}
         <div class="links">
             <a href="https://github.com/pionl/laravel-chunk-upload">Github docs</a>
@@ -55,7 +59,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 @yield('body-end')
-<script src="{{ asset('/chunk-example/js/app.js') }}"></script>
+@vite(['resources/assets/js/app.js'])
 <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

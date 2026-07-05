@@ -2,11 +2,18 @@
 const versions = require('../versions.json');
 const getPreferredVersion = require('./getPreferredVersion.js');
 
-function getVersions (userInput) {
-    // Track which versions should we init? All or given (in argument)
+/**
+ *
+ * @param {string} userInput
+ * @param {{first: boolean|undefined, unique: boolean|undefined}} options Return only first version, unique: return uniuqe laravel version
+ * @returns {*|*[]}
+ */
+function getVersions (userInput, options = {}) {
+    // Track which versions we should init? All or given (in argument)
     const useOnlyGivenVersion = getPreferredVersion(userInput);
     const useGivenVersions = [];
     let noVersions = true;
+    let laravelVersion = {}
 
     versions.forEach(version => {
         const preferredVersion = version.laravel === useOnlyGivenVersion;
@@ -19,6 +26,12 @@ function getVersions (userInput) {
                 return true;
             }
 
+            if (options.unique && laravelVersion[version.laravel] === true) {
+                return true;
+            }
+
+            laravelVersion[version.laravel] = true
+
             useGivenVersions.push(version);
         }
     })
@@ -27,7 +40,14 @@ function getVersions (userInput) {
         throw new Error('✋ Given version does not exists: ' + useOnlyGivenVersion);
     }
 
-    return useGivenVersions.reverse();
+    const sorted = useGivenVersions.reverse();
+
+    // The goal is to find first usable laravel version
+    if (!options.first) {
+        return sorted;
+    }
+
+    return sorted.slice(0, 1);
 }
 
 module.exports = getVersions

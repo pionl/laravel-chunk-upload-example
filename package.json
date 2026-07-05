@@ -10,9 +10,11 @@
     "scripts": {
         "setup": "node setup.js --",
         "test": "node tests.js --",
-        "test-local": "./node_modules/.bin/codeceptjs run --steps --verbose",
-        "test-debug": "CODECEPT_DEBUG=true ./node_modules/.bin/codeceptjs run --steps --verbose",
-        "compile-example": "cd example && npm run dev"
+        "test-local": "playwright test",
+        "test-debug": "playwright test --project=chromium --debug",
+        "test-ui": "playwright test --ui",
+        "test-local-setup": "playwright install chromium",
+        "compile-example": "cd example && npm run build"
     },
     "repository": {
         "type": "git",
@@ -29,5 +31,8 @@
         "execa": "^4.0.2",
         "markdown-table": "^2.0.0",
         "meow": "^7.0.1"
+    },
+    "devDependencies": {
+        "@playwright/test": "1.61.1"
     }
 }

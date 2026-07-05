@@ -18,7 +18,7 @@ class CheckUploadedFile extends BaseController
     public function check($mime, $dateFolder, $fileName)
     {
         // Build the file path
-        $filePath = "upload/{$mime}/{$dateFolder}/{$fileName}";
+        $filePath = "public/upload/{$mime}/{$dateFolder}/{$fileName}";
         $finalPath = storage_path("app/{$filePath}");
 
         if (file_exists($finalPath) === false) {

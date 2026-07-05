@@ -6,3 +6,4 @@
 /example/package-lock.json
 /example/vendor
 /example/composer.lock
+/example/node_modules

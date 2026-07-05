@@ -32,13 +32,13 @@ async function main () {
     const exampleDirectory = path.resolve(currentDirectory, 'example');
     await compileExample(exampleDirectory, cli.flags.verbose)
 
-    const useGivenVersions = getVersions(cli.input);
+    const useGivenVersions = getVersions(cli.input, {unique: true});
     await versionsRecursively(useGivenVersions, async function (version) {
         console.log(colors.green('🚀 Publishing changes ') + colors.gray(version.laravel));
         const versionDir = path.resolve(currentDirectory, version.laravel);
 
         await publish(versionDir, cli.flags.verbose);
-    })
+    }, cli.flags.verbose)
 }
 
 program(process, cli, 'Compiling for', main)

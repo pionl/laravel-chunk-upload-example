@@ -29,19 +29,27 @@ async function setupVersion (version, currentDirectory, verbose, index = 0) {
         console.log('Version directory: ',versionDir);
     }
 
+    const envComposer = {
+        'COMPOSER_NO_SECURITY_BLOCKING': 1, // due a support of older version,
+        'COMPOSER_NO_BLOCKING': 1
+    }
 
     // Update or install Laravel project
-    if (fs.existsSync(versionDir)) {
-        await run('composer', ['update'], versionDir, verbose);
+    if (fs.existsSync(path.resolve(versionDir, 'composer.json'))) {
+        await run('composer', ['update'], versionDir, verbose, envComposer);
     } else {
+        if (fs.existsSync(versionDir)) {
+            fs.rmdirSync(versionDir)
+        }
+
         const options = [
             'create-project',
             '--prefer-dist',
             `laravel/laravel`,
             version.laravel,
-            version.laravel
+            version.laravel,
         ];
-        await run('composer', options, currentDirectory, verbose);
+        await run('composer', options, currentDirectory, verbose, envComposer);
     }
 
     // Delete default routes path and create a an empty php file.
@@ -66,6 +74,8 @@ async function setupVersion (version, currentDirectory, verbose, index = 0) {
     }
 
     await publish(versionDir, verbose);
+
+    await run('php', ['artisan', 'storage:link'], versionDir, verbose);
 }
 
 module.exports = setupVersion

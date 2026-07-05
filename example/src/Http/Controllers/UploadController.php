@@ -83,7 +83,7 @@ class UploadController extends BaseController
     }
 
     /**
-     * Saves the file
+     * Saves the file. NOTE: use a better implementation using disk.
      *
      * @param UploadedFile $file
      *
@@ -98,14 +98,15 @@ class UploadController extends BaseController
         $dateFolder = date("Y-m-W");
 
         // Build the file path
-        $filePath = "upload/{$mime}/{$dateFolder}/";
+        $filePath = "public/upload/{$mime}/{$dateFolder}/";
         $finalPath = storage_path("app/".$filePath);
 
         // move the file name
         $file->move($finalPath, $fileName);
 
         return response()->json([
-            'path' => $filePath,
+            // Just a quick hack
+            'path' => str_replace('public/', 'storage/', $filePath),
             'name' => $fileName,
             'mime_type' => $mime
         ]);

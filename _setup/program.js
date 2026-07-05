@@ -1,4 +1,5 @@
 const colors = require('colors');
+const {cleanupActiveProcess} = require('./processCleanup.js');
 
 /**
  * Wraps given function in async call that will catch and exit program
@@ -19,11 +20,18 @@ function program (process, cli, task, run) {
     return (async () => {
         await run()
     })().catch(error => {
-        console.log(colors.red('🙈 ' + error.message));
-        if (cli.flags.verbose) {
-            console.log(error);
-        }
-        process.exit(1)
+        return cleanupActiveProcess().catch(cleanupError => {
+            console.log(colors.red('🙈 Cleanup failed ' + cleanupError.message));
+        }).finally(() => {
+            if (error.message !== 'Aborted' && !error.message.includes('Command failed with exit code 130')) {
+                return;
+            }
+            console.log(colors.red('🙈 ' + error.message));
+            if (cli.flags.verbose) {
+                console.log(error);
+            }
+            process.exit(1)
+        });
     });
 }
 

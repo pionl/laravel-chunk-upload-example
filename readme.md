@@ -26,7 +26,7 @@ npm install
 
 ## Usage
 
-**To install and run a specific version of Laravel, use the X.\* version format.**
+**To install and run a specific version of Laravel, use the X version format.**
 
 ```bash
 node run.js "8.*"
@@ -42,44 +42,55 @@ Open http://localhost:8000
 
 > The current version of laravel-chunk-upload is tested against:
 
-| Laravel | PHP                                   | Run               | Tests                  |
-|---------|---------------------------------------|-------------------|------------------------|
-| 12.*    | 8.2-node-20                           | `node run "12.*"` | `node tests.js "12.*"` |
-| 11.*    | 8.2-node-20                           | `node run "11.*"` | `node tests.js "11.*"` |
-| 10.*    | 8.1-node-17, 8.2-node-18              | `node run "10.*"` | `node tests.js "10.*"` |
-| 9.*     | 8.0-node-17, 8.1-node-17, 8.2-node-18 | `node run "9.*"`  | `node tests.js "9.*"`  |
-| 8.*     | 7.4-node-17, 8.0-node-17, 8.1-node-17 | `node run "8.*"`  | `node tests.js "8.*"`  |
-| 7.*     | 7.4-node-17                           | `node run "7.*"`  | `node tests.js "7.*"`  |
+| Laravel | PHP                                                | Run               | Tests                  |
+|---------|----------------------------------------------------|-------------------|------------------------|
+| 13.*    | 8.4-node-24, 8.5-node-24                           | `node run "13.*"` | `node tests.js "13.*"` |
+| 12.*    | 8.2-node-20, 8.3-node-24, 8.4-node-24, 8.5-node-24 | `node run "12.*"` | `node tests.js "12.*"` |
+| 11.*    | 8.2-node-20, 8.3-node-22, 8.4-node-22              | `node run "11.*"` | `node tests.js "11.*"` |
+| 10.*    | 8.1-node-17, 8.2-node-18                           | `node run "10.*"` | `node tests.js "10.*"` |
+| 9.*     | 8.0-node-17, 8.1-node-17, 8.2-node-18              | `node run "9.*"`  | `node tests.js "9.*"`  |
+| 8.*     | 7.4-node-17, 8.0-node-17, 8.1-node-17              | `node run "8.*"`  | `node tests.js "8.*"`  |
+| 7.*     | 7.4-node-17                                        | `node run "7.*"`  | `node tests.js "7.*"`  |
+
+> When adding a new version, update the **version.json** and run `node versionsTable.js` to update the table above. 
 
 ## Tests
 
 > Pass --verbose for debug information.
 
-**Run tests on all Laravel versions (install them before using it) using docker**
+**Run tests on a desired Laravel version and only on the first PHP version**
+
+```bash
+node tests.js "8.*" --first
+```
+
+> Remove **--first** parameter to test all PHP versions. 
+
+**Run tests on all Laravel versions using docker**
 
 ```bash
 node tests.js
 ```
 
-**Run tests on a desired Laravel version**
-
-```bash
-node tests.js "8.*"
-```
-
 ### Running Tests Locally
 
-* In one terminal, run `php 7.\*/artisan serve --host=0.0.0.0 --port=8000`.
-* In a second terminal, run tests with `./node_modules/.bin/codeceptjs run --steps`.
-* `npm run test-debug` will show the browser while tests are running.
+* `test-local-setup`
+* Setup the version you want `node setup.js "13.*"`
+* In one terminal, run `php 13/artisan serve --host=0.0.0.0 --port=8000`.
+* In a second terminal, install the local browser once with `npm run test-local-setup`.
+* Run tests with `npm run test-local`.
+* `npm run test-debug -- tests/jquery-upload.spec.js` (example of a test file) will open Playwright Inspector for a single test file.
+* `npm run test-ui` opens Playwright UI mode so you can pick one test to run or debug.
 
 ### Docker-Compose
 
 * Environment variables should be passed: `IMAGE_VERSION` (PHP version) and `LARAVEL_VERSION`.
+* The Playwright runner waits for the Laravel container and then executes the browser suite.
+* The Laravel CI base image is `amd64`-only, so `arm64` machines need Docker x86_64 emulation enabled.
 * `abort-on-container-exit` needs to be used to stop the Laravel server.
 
 ```bash
-IMAGE_VERSION=8.2-node-20 LARAVEL_VERSION=12.\* docker compose -f docker-compose.yml -f docker-compose-tests.yml up --abort-on-container-exit
+IMAGE_VERSION=8.2-node-20 LARAVEL_VERSION=12 docker compose -f docker-compose.yml -f docker-compose-tests.yml up --abort-on-container-exit
 ```
 
 We are using docker images built for [Laravel](https://github.com/pionl/docker-php-laravel-ci)
@@ -111,7 +122,7 @@ bash update.sh
 
 * Add a new version to the `versions.json` file.
 * Add your changes to the `laravel-chunk-upload` folder.
-* Test the Laravel version with `node tests.js "10.\*"`.
+* Test the Laravel version with `node tests.js "10"`.
 * Run tests on all versions with `node tests.js` to ensure backward compatibility.
 
 ## Example Code
@@ -131,19 +142,11 @@ Example code found at [./example/src/Http/Controllers/UploadController.php](./ex
 
 ## Contribution
 
-* If you make changes in assets, do not forget to call `node compile.js` to compile the changes and publish them to all versions (you can also pass the desired version).
-
-# TODO
-
-- Improve example controller.
-- Add tests to Dropzone.
-- Clean storage after tests.
-- Add tests for parallel save.
+* If you make changes in assets, remember to call `node compile.js` to compile the changes and publish them to all versions (you can also pass the desired version).
 
 ### Running Tests on the Latest Laravel Release
 
 **I did not find a way to install Laravel on master with the latest changes from the framework. Let me know if you know how.**
-
 
 ## Copyright and License
 

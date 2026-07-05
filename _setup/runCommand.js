@@ -1,6 +1,6 @@
 const execa = require('execa');
 const colors = require('colors');
-const {state} = require('./processCleanup.js')
+const {clearActiveProcess, setActiveProcess} = require('./processCleanup.js')
 
 /**
  * Runs given command and pipe stdout to a current process.
@@ -14,13 +14,13 @@ const {state} = require('./processCleanup.js')
  * @return {Promise<execa.ExecaChildProcess>}
  */
 async function run (command, commandArgs, cwd, pipeOutput = false, env = {}) {
-    const commandInString = colors.gray(command + ' ' + commandArgs.join(' '))
+    const commandInString = colors.gray(command + ' ' + commandArgs.join(' ') + (Object.keys(env).length === 0 ? '' : ' ' + JSON.stringify(env)))
     console.log(colors.green('💪 Running ') + commandInString)
 
     const options = {cwd: cwd, env: env}
     const commandProcess = execa(command, commandArgs, options);
 
-    state.currentProcess = commandProcess
+    setActiveProcess(commandProcess);
 
     if (pipeOutput) {
         commandProcess.stdout.pipe(process.stdout);
@@ -33,11 +33,11 @@ async function run (command, commandArgs, cwd, pipeOutput = false, env = {}) {
         console.log(colors.green('🎉️‍ ️Done ') + (pipeOutput ? commandInString : ''))
         console.log(' ')
 
-        state.currentProcess = null
+        clearActiveProcess(commandProcess);
 
         return commandProcess
     } catch (error) {
-        state.currentProcess = null
+        clearActiveProcess(commandProcess);
 
         if (pipeOutput) {
             console.log(colors.red('🙈 Something went wrong ') + commandInString)

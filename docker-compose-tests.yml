@@ -1,13 +1,16 @@
 services:
-  laravel:
-    ports: []
-
-  codeceptjs:
-    image: codeception/codeceptjs
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.61.1-noble
     environment:
-      - CODECEPT_URL=http://laravel:8000
-    command: ["./wait-for-it/wait-for-it.sh", "--strict", "laravel:8000", "--", "codeceptjs", "run", "--steps"]
+      - PLAYWRIGHT_BASE_URL=http://laravel:8000
+    working_dir: /work
+    command:
+      [
+        "bash",
+        "-lc",
+        "npm ci && ./wait-for-it/wait-for-it.sh --strict laravel:8000 -- npx playwright test"
+      ]
     depends_on:
       - laravel
     volumes:
-      - .:/tests
+      - .:/work

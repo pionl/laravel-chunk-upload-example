@@ -24,7 +24,7 @@ async function runRecursively (versions, onVersion, versionIndex = 0) {
 
     await onVersion(version)
 
-    return versionsRecursively(versions, onVersion, versionIndex + 1)
+    return await runRecursively(versions, onVersion, versionIndex + 1)
 }
 
 /**
@@ -32,13 +32,13 @@ async function runRecursively (versions, onVersion, versionIndex = 0) {
  * @param {Array} versions
  * @param {Promise|function} onVersion
  * @param {boolean} isVerbose
+ * @param {boolean} canRunParallel
  * @return {Promise<undefined|*}
  */
-async function versionsRecursively (versions, onVersion, isVerbose) {
-    if (isVerbose) {
+async function versionsRecursively (versions, onVersion, isVerbose= false, canRunParallel = true) {
+    if (isVerbose || canRunParallel === false) {
         return await runRecursively(versions, onVersion)
     }
-    let tasks = []
 
     // Limit to X tasks at once to prevent over spamming github
     const chunks = chunk(versions, Math.min(4, Math.ceil(os.cpus().length / 2)))
@@ -50,7 +50,6 @@ async function versionsRecursively (versions, onVersion, isVerbose) {
 
         await Promise.all(innerTasks)
     }
-
 }
 
 

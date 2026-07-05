@@ -2,6 +2,7 @@
 
 namespace Pion\Laravel\ChunkUploadExample;
 
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Pion\Laravel\ChunkUpload\Providers\ChunkUploadServiceProvider;
 
@@ -22,8 +23,11 @@ class ExampleServiceProvider extends ServiceProvider
         $this->_loadRoutesFrom(__DIR__ . '/routes.php');
 
         $this->publishes([
-            __DIR__ . '/../chunk-example' => public_path('chunk-example'),
+            __DIR__ . '/../chunk-example' => public_path('chunk-example'), // publish our build assets
+            __DIR__ . '/../resources/assets' => resource_path('assets'),// vite needs this
         ], 'public');
+
+        Vite::useBuildDirectory('chunk-example');
     }
 
     /**
