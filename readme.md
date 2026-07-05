@@ -42,15 +42,13 @@ Open http://localhost:8000
 
 > The current version of laravel-chunk-upload is tested against:
 
-| Laravel | PHP                                                | Run               | Tests                  |
-|---------|----------------------------------------------------|-------------------|------------------------|
-| 13.*    | 8.4-node-24, 8.5-node-24                           | `node run "13.*"` | `node tests.js "13.*"` |
-| 12.*    | 8.2-node-20, 8.3-node-24, 8.4-node-24, 8.5-node-24 | `node run "12.*"` | `node tests.js "12.*"` |
-| 11.*    | 8.2-node-20, 8.3-node-22, 8.4-node-22              | `node run "11.*"` | `node tests.js "11.*"` |
-| 10.*    | 8.1-node-17, 8.2-node-18                           | `node run "10.*"` | `node tests.js "10.*"` |
-| 9.*     | 8.0-node-17, 8.1-node-17, 8.2-node-18              | `node run "9.*"`  | `node tests.js "9.*"`  |
-| 8.*     | 7.4-node-17, 8.0-node-17, 8.1-node-17              | `node run "8.*"`  | `node tests.js "8.*"`  |
-| 7.*     | 7.4-node-17                                        | `node run "7.*"`  | `node tests.js "7.*"`  |
+| Laravel | PHP                                                | Run             | Tests                |
+|---------|----------------------------------------------------|-----------------|----------------------|
+| 13      | 8.3-node-22, 8.4-node-24, 8.5-node-24              | `node run "13"` | `node tests.js "13"` |
+| 12      | 8.2-node-20, 8.3-node-22, 8.4-node-24, 8.5-node-24 | `node run "12"` | `node tests.js "12"` |
+| 11      | 8.2-node-20, 8.3-node-22, 8.4-node-22              | `node run "11"` | `node tests.js "11"` |
+| 10      | 8.2-node-20                                        | `node run "10"` | `node tests.js "10"` |
+| 9       | 8.2-node-20                                        | `node run "9"`  | `node tests.js "9"`  |
 
 > When adding a new version, update the **version.json** and run `node versionsTable.js` to update the table above. 
 
@@ -81,6 +79,12 @@ node tests.js
 * Run tests with `npm run test-local`.
 * `npm run test-debug -- tests/jquery-upload.spec.js` (example of a test file) will open Playwright Inspector for a single test file.
 * `npm run test-ui` opens Playwright UI mode so you can pick one test to run or debug.
+
+When tweaking only test and example logic after setup, run this:
+
+``` bash
+node setup.js 12 --only-example && php 12/artisan serve --host=0.0.0.0 --port=8000
+```
 
 ### Docker-Compose
 

@@ -27,6 +27,7 @@
             <a href="{{ url('jquery-file-upload') }}">jQuery-File-Upload example</a>
             <a href="{{ url('dropzone') }}">DropZone</a>
             <a href="{{ url('resumable') }}">Resumable</a>
+            <a href="{{ url('flow') }}">Flow.js</a>
             <a href="https://github.com/laravel/laravel">Laravel framework</a>
         </div>
         @yield('content')

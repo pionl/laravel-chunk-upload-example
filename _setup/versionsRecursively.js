@@ -40,8 +40,8 @@ async function versionsRecursively (versions, onVersion, isVerbose= false, canRu
         return await runRecursively(versions, onVersion)
     }
 
-    // Limit to X tasks at once to prevent over spamming github
-    const chunks = chunk(versions, Math.ceil(os.cpus().length / 2));
+    // Limit to X tasks at once to prevent over spamming GitHub and stable on the host.
+    const chunks = chunk(versions, 2);
     for (let i = 0; i < chunks.length; i++) {
         const innerTasks = []
         chunks[i].forEach(function (version) {

@@ -1,3 +1,4 @@
+// This example is just a PoC - not production ready!
 var $ = window.$; // use the global jQuery instance
 
 var $uploadList = $("#file-upload-list");

@@ -28,25 +28,25 @@ async function runComposeCommand (version, cwd, pipeOutput, options = {}) {
         LARAVEL_VERSION: version.laravel,
     };
     const upArgs = getComposeArgs(projectName, files, ['up'].concat(options.upArgs || []));
-    const stopArgs = getComposeArgs(projectName, files, ['stop']);
+    const downArgs = getComposeArgs(projectName, files, ['down', '--volumes', '--remove-orphans']);
     const commandInString = colors.gray(`docker ${upArgs.join(' ')} ${JSON.stringify(environmentVars)}`);
     const commandProcess = execa('docker', upArgs, {cwd: cwd, env: environmentVars});
     const readinessAbortController = typeof options.readinessCheck === 'function' ? new AbortController() : null;
 
     console.log(colors.green('💪 Running ') + commandInString)
 
-    async function stopComposeProject () {
-        if (state.isCleaningUp === false) {
-            return;
-        }
+    async function cleanupComposeProject () {
+        const downCommand = colors.gray(`docker ${downArgs.join(' ')} ${JSON.stringify(environmentVars)}`);
+        console.log(colors.green('🧹 Cleaning up ') + downCommand)
 
-        const stopCommand = colors.gray(`docker ${stopArgs.join(' ')} ${JSON.stringify(environmentVars)}`);
-        console.log(colors.green('🧹 Stopping ') + stopCommand)
-
-        await execa('docker', stopArgs, {cwd: cwd, env: environmentVars});
+        await execa('docker', downArgs, {cwd: cwd, env: environmentVars});
     }
 
-    setActiveProcess(commandProcess, stopComposeProject);
+    setActiveProcess(commandProcess, async () => {
+        if (state.isCleaningUp) {
+            await cleanupComposeProject();
+        }
+    });
 
     if (pipeOutput) {
         commandProcess.stdout.pipe(process.stdout);
@@ -73,17 +73,19 @@ async function runComposeCommand (version, cwd, pipeOutput, options = {}) {
         console.log(colors.green('🎉️‍ ️Done ') + (pipeOutput ? commandInString : ''))
         console.log(' ')
 
-        clearActiveProcess(commandProcess);
-
         return commandProcess
     } catch (error) {
-        clearActiveProcess(commandProcess);
-
         if (pipeOutput) {
             console.log(colors.red('🙈 Something went wrong ') + commandInString)
         }
 
         throw error
+    } finally {
+        clearActiveProcess(commandProcess);
+
+        if (options.cleanup) {
+            await cleanupComposeProject();
+        }
     }
 }
 

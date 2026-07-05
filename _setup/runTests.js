@@ -17,7 +17,8 @@ async function runTests (version, currentDirectory, verbose) {
 
         const result = await runComposeCommand(version, currentDirectory, verbose, {
             files: ['docker-compose.yml', 'docker-compose-tests.yml'],
-            upArgs: ['--abort-on-container-exit', '--build']
+            upArgs: ['--abort-on-container-exit', '--build'],
+            cleanup: true
         });
 
         return result.exitCode === 0

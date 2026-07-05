@@ -1,9 +1,11 @@
 <?php
+
 namespace Pion\Laravel\ChunkUploadExample\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\JsonResponse;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadFailedException;
+use Psr\Log\LoggerInterface;
 use Storage;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -24,9 +26,12 @@ class UploadController extends BaseController
      * @throws UploadMissingFileException
      * @throws UploadFailedException
      */
-    public function upload(Request $request) {
+    public function upload(Request $request, LoggerInterface $logger): JsonResponse
+    {
         // create the file receiver
         $receiver = new FileReceiver("file", $request, HandlerFactory::classFromRequest($request));
+
+        $this->logUploadRequest($request, $logger, 'chunk-upload.controller.request-received');
 
         // check if the upload is success, throw exception or return response you need
         if ($receiver->isUploaded() === false) {
@@ -38,6 +43,10 @@ class UploadController extends BaseController
 
         // check if the upload has finished (in chunk mode it will send smaller files)
         if ($save->isFinished()) {
+            $this->logUploadRequest($request, $logger, 'chunk-upload.controller.upload-finished', [
+                'is_finished' => true,
+                'handler' => get_class($save->handler()),
+            ]);
             // save the file and return any response you need, current example uses `move` function. If you are
             // not using move, you need to manually delete the file by unlink($save->getFile()->getPathname())
             return $this->saveFile($save->getFile());
@@ -46,6 +55,12 @@ class UploadController extends BaseController
         // we are in chunk mode, lets send the current progress
         /** @var AbstractHandler $handler */
         $handler = $save->handler();
+
+        $this->logUploadRequest($request, $logger, 'chunk-upload.controller.chunk-progress', [
+            'is_finished' => false,
+            'handler' => get_class($handler),
+            'done' => $handler->getPercentageDone(),
+        ]);
 
         return response()->json([
             "done" => $handler->getPercentageDone(),
@@ -78,7 +93,7 @@ class UploadController extends BaseController
         return response()->json([
             'path' => $disk->url($fileName),
             'name' => $fileName,
-            'mime_type' =>$mime
+            'mime_type' => $mime
         ]);
     }
 
@@ -99,7 +114,7 @@ class UploadController extends BaseController
 
         // Build the file path
         $filePath = "public/upload/{$mime}/{$dateFolder}/";
-        $finalPath = storage_path("app/".$filePath);
+        $finalPath = storage_path("app/" . $filePath);
 
         // move the file name
         $file->move($finalPath, $fileName);
@@ -114,17 +129,33 @@ class UploadController extends BaseController
 
     /**
      * Create unique filename for uploaded file
+     *
      * @param UploadedFile $file
+     *
      * @return string
      */
     protected function createFilename(UploadedFile $file)
     {
         $extension = $file->getClientOriginalExtension();
-        $filename = str_replace(".".$extension, "", $file->getClientOriginalName()); // Filename without extension
+        $filename = str_replace("." . $extension, "", $file->getClientOriginalName()); // Filename without extension
 
         // Add timestamp hash to name of the file
         $filename .= "_" . md5(time()) . "." . $extension;
 
         return $filename;
+    }
+
+    protected function logUploadRequest(Request $request, LoggerInterface $logger, string $message, array $extra = []): void
+    {
+        $file = $request->file('file');
+
+        $logger->debug($message, array_merge([
+            'route' => $request->path(),
+            'handler_class' => HandlerFactory::classFromRequest($request),
+            'client_original_name' => $file?->getClientOriginalName(),
+            'current_chunk' => $request->input('flowChunkNumber', $request->input('resumableChunkNumber')),
+            'total_chunks' => $request->input('flowTotalChunks', $request->input('resumableTotalChunks')),
+            'upload_identifier' => $request->input('flowIdentifier', $request->input('resumableIdentifier')),
+        ], $extra));
     }
 }

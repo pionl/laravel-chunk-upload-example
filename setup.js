@@ -19,6 +19,7 @@ const cli = meow(`
 	Options
 	  --verbose, -v  Output composer / npm output
 	  --ignore-example, -ix  Do not update and build the example repo
+	  --only-example Re-compiles example and publishes it
 
 	Examples
 	  $ node setup.js
@@ -30,6 +31,10 @@ const cli = meow(`
             alias: 'v'
         },
         ignoreExample: {
+            type: 'boolean',
+            alias: 'ix'
+        },
+        onlyExample: {
             type: 'boolean',
             alias: 'ix'
         }
@@ -56,7 +61,7 @@ async function main () {
     console.log('Setting up versions: ', useGivenVersions)
 
     await versionsRecursively(useGivenVersions, async function (version) {
-        await setupVersion(version, currentDirectory, cli.flags.verbose)
+        await setupVersion(version, currentDirectory, cli.flags.verbose, cli.flags.onlyExample)
     }, cli.flags.verbose);
 }
 

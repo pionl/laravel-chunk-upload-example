@@ -16,6 +16,7 @@
     "vite-plugin-static-copy": "^3.0.0"
   },
   "dependencies": {
+    "@flowjs/flow.js": "^2.14.1",
     "resumablejs": "^1.1.0"
   }
 }

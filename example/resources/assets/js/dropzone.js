@@ -1,3 +1,4 @@
+// This example is just a PoC - not production ready!
 var $ = window.$; // use the global jQuery instance
 
 if ($("#my-awesome-dropzone").length > 0) {

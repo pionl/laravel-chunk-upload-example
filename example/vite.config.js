@@ -21,6 +21,10 @@ export default defineConfig({
                 {
                     src: 'node_modules/resumablejs/resumable.js',
                     dest: 'vendor/resumable'
+                },
+                {
+                    src: 'node_modules/@flowjs/flow.js/dist/flow.js',
+                    dest: 'vendor/flow'
                 }
             ]
         })

@@ -55,5 +55,9 @@ Route::group([
             'code' => file_get_contents($jsAssetsFolder . 'resumable.js')
         ]);
     });
+    Route::get('/flow', function () use ($jsAssetsFolder) {
+        return view('chunk-example::example/flow', [
+            'code' => file_get_contents($jsAssetsFolder . 'flow.js')
+        ]);
+    });
 });
-

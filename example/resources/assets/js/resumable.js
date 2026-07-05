@@ -1,3 +1,4 @@
+// This example is just a PoC - not production ready!
 var $ = window.$; // use the global jQuery instance
 
 var $fileUpload = $('#resumable-browse');
@@ -41,8 +42,16 @@ if ($fileUpload.length > 0 && $fileUploadDrop.length > 0) {
             resumable.upload();
         });
         resumable.on('fileSuccess', function (file, message) {
+            console.log('fileSuccess', file, message)
+            var uploadResponse = JSON.parse(message);
             // Reflect that the file upload has completed
             $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('(completed)');
+
+            if (typeof uploadResponse.path === 'string' && typeof uploadResponse.name === 'string') {
+                $uploadList.append('<li>Uploaded: ' + uploadResponse.path + uploadResponse.name + '</li>');
+            } else {
+                $uploadList.append('<li>Response invalid: ' + message +'</li>')
+            }
         });
         resumable.on('fileError', function (file, message) {
             // Reflect that the file upload has resulted in error

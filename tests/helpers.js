@@ -1,5 +1,5 @@
 const path = require('path');
-const { expect } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 
 const IMAGE_PATH = path.resolve(__dirname, '..', 'test_image.jpeg');
 const EXPECTED_SHA1 = 'c5ebe8da4df8f4242a6fc09344a07d06ea138242';
@@ -31,9 +31,20 @@ async function assertUploadedFile(page) {
     await assertUploadedFilePath(page, uploadedFile);
 }
 
+async function checkUploadSimpleResult (page) {
+    const fileInput = page.locator('input[type="file"]').last();
+    await expect(fileInput).toBeAttached();
+    await fileInput.setInputFiles(IMAGE_PATH);
+
+    await expect(page.locator('#file-upload-list')).toBeVisible();
+    await expect(page.locator('#file-upload-list li').first()).toContainText('Uploading');
+    await expect(page.locator('#file-upload-list li', { hasText: '(completed)' }).last()).toBeVisible();
+
+    await assertUploadedFile(page)
+}
+
 module.exports = {
     IMAGE_PATH,
     assertUploadedFile,
-    assertUploadedFilePath,
-    normalizeUploadedFilePath,
+    checkUploadSimpleResult,
 };
