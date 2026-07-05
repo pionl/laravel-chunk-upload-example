@@ -41,7 +41,7 @@ async function versionsRecursively (versions, onVersion, isVerbose= false, canRu
     }
 
     // Limit to X tasks at once to prevent over spamming github
-    const chunks = chunk(versions, Math.min(4, Math.ceil(os.cpus().length / 2)))
+    const chunks = chunk(versions, 2)
     for (let i = 0; i < chunks.length; i++) {
         const innerTasks = []
         chunks[i].forEach(function (version) {
